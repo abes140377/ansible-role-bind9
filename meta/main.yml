@@ -12,6 +12,5 @@ galaxy_info:
     - nameserver
   platforms:
     - name: Ubuntu
-        - focal
         - jammy
         - noble

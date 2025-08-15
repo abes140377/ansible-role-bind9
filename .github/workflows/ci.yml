@@ -42,8 +42,6 @@ jobs:
       matrix:
         distro:
           - os: ubuntu
-            release: 20.04
-          - os: ubuntu
             release: 22.04
           - os: ubuntu
             release: 24.04
