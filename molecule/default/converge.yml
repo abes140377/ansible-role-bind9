@@ -12,11 +12,15 @@
         - 8.8.8.8
         - 4.4.4.4
       bind9_generate_ddns_key: true
+      bind9_named_logging: true
+      bind9_named_statistics_channel_enable: true
       bind9_zones:
         - name: homelab.example.com
           type: primary
           ddns_update_key: ddnskey
           ddns_update_policy_grant: "zonesub any"
+          secondary_servers:
+            - 'key "dnskey"'
           default_ttl: 600
           serial: 2024101102
           refresh: 1D
@@ -64,3 +68,19 @@
             - label: 13.2
               type: PTR
               rdata: node3.homelab.example.com.
+  tasks:
+    - name: Load ddns key from file in DNS node
+      shell: |
+        cat /etc/bind/keys/ddnskey.key | awk '/secret/ {print $2}' | sed 's/[";]//g'
+      register: ddns_key
+      become: true
+      changed_when: false
+      when: bind9_ddns_key is not defined
+
+    - name: Get DDNS key
+      set_fact:
+        bind9_ddns_key: "{{ ddns_key.stdout }}"
+
+    - name: debug
+      debug:
+        var: bind9_ddns_key

@@ -56,3 +56,7 @@ bind9_zones: []
 # Enable logging
 bind9_named_logging: false
 bind9_log_path: /var/log/named
+
+# Enable statistics channel
+bind9_named_statistics_channel_enable: false
+bind9_named_statistics_port: 8053

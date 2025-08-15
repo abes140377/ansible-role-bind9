@@ -93,6 +93,12 @@ Available variables are listed below along with default values (see `defaults\ma
   bind9_named_logging: false
   bind9_log_path: /var/log/named
   ```
+  Enable statistics channel
+  ```yaml
+  # Enable statistics channel
+  bind9_named_statistics_channel_enable: false
+  bind9_named_statistics_port: 8053
+  ```
 
 - Configure Zone files
 

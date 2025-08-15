@@ -91,3 +91,8 @@ logging {
 
 };
 {% endif %}
+{% if bind9_named_statistics_channel_enable %}
+statistics-channels {
+    inet 127.0.0.1 port {{ bind9_named_statistics_port|default(8053) }} allow { 127.0.0.1; };
+};
+{% endif %}
