@@ -27,10 +27,10 @@ $TTL {{ zone.default_ttl|default(zone.negative_ttl|default('3600')) }}   ; 1 hou
    Empezamos detallando el SOA y NS, que son indispensables, y registros de raíz de zona #}
 {{ zone.name }} IN  SOA     {{ zone.primary|default(zone.ns_records.0) }}. {{ zone.admin|default(bind9_admin) }}. (
                 {{ zone.serial }} ; serial
-                {{ zone.refresh|default('14400') }} ; refresh (3 hours)
-                {{ zone.retry|default('3600') }} ; retry (1 hour)
-                {{ zone.expire|default('604800') }} ; expire (1 week)
-                {{ zone.minimum|default('10800') }} ; minimum (3 hours)
+                {{ zone.refresh|default('14400') }}
+                {{ zone.retry|default('3600') }}
+                {{ zone.expire|default('604800') }}
+                {{ zone.minimum|default('10800') }} ;
                 )
 {% for ns in zone.ns_records %}
                     NS      {{ ns }}
