@@ -1,5 +1,4 @@
 ---
-
 # User and group for bind
 bind9_user: bind
 bind9_group: bind
@@ -14,6 +13,9 @@ bind9_packages:
 # Zones files and journals expected in /var/lib/bind
 bind9_zonedir: /var/lib/bind
 bind9_keydir: /etc/bind/keys
+
+# Port to listen on
+bind9_port: 53
 
 # Enable IPv6
 bind9_enable_ipv6: false

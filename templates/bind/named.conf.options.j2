@@ -5,9 +5,9 @@ options {
 	// to talk to, you may need to fix the firewall to allow multiple
 	// ports to talk.  See http://www.kb.cert.org/vuls/id/800113
 
-	// If your ISP provided one or more IP addresses for stable 
-	// nameservers, you probably want to use them as forwarders.  
-	// Uncomment the following block, and insert the addresses replacing 
+	// If your ISP provided one or more IP addresses for stable
+	// nameservers, you probably want to use them as forwarders.
+	// Uncomment the following block, and insert the addresses replacing
 	// the all-0's placeholder.
 
 {% if bind9_forward|default() %}
@@ -23,12 +23,12 @@ options {
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
 	dnssec-validation {{ bind9_dnssec_validation }};
-   
+
     // Listening on
 {% if bind9_enable_ipv6 %}
-	listen-on-v6 { {% if bind9_listen_on_v6|default() %}{% for ip in bind9_listen_on_v6 %}{{ ip }};{% endfor %}{% else %}any{% endif %}; };
+	listen-on-v6 port {{ bind9_port }} { {% if bind9_listen_on_v6|default() %}{% for ip in bind9_listen_on_v6 %}{{ ip }};{% endfor %}{% else %}any{% endif %}; };
 {% endif %}
-	listen-on { {% if bind9_listen_on|default() %}{% for ip in bind9_listen_on %}{{ ip }};{% endfor %}{% else %}any{% endif %}; };
+	listen-on port {{ bind9_port }} { {% if bind9_listen_on|default() %}{% for ip in bind9_listen_on %}{{ ip }};{% endfor %}{% else %}any{% endif %}; };
 {% if bind9_recursor %}
     // Recursion configuration
     recursion {{ bind9_recursor|default()|ternary('yes', 'no') }};
